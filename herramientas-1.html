@@ -1,0 +1,130 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>Herramientas - Programación Híbrida</title>
+
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/5.0.2/reset.min.css" />
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/5.0.2/reveal.min.css" />
+		
+		<!-- otros themes: https://revealjs.com/themes/ Ejemplos: black, white, league, beige, sky, night, serif, simple, solarized, blood, moon -->
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/5.0.2/theme/white.min.css" />
+		<!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/5.0.2/theme/blood.min.css" /> -->
+
+		<!-- Theme used for syntax highlighted code -->
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/5.0.2/plugin/highlight/monokai.min.css" />
+		
+		<link rel="stylesheet" href="estilo.css" />
+		
+		<!-- plugin notación matemática -->
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/5.0.2/plugin/math/math.min.js"></script>
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+				<section data-separator="^---$" data-separator-vertical="^===$" data-separator-notes="^Note:" data-markdown data-line-numbers>
+    				<textarea data-template>
+## [Herramientas - Parte 1](#)
+### Programación Híbrida
+
+---
+## [¿De qué trata el curso?](#)
+
+- Con un único código base (HTML, CSS y Typescript)
+- Generar aplicaciones para distintas plataformas (Web, iOS y Android)
+- En el curso se utiliza Ionic + CapacitorJS + Angular
+
+---
+## [Herramientas del Curso](#)
+
+1. Visual Studio Code 
+2. Live Server (opcional)
+3. Typescript Playground
+4. NodeJS
+5. Extensión Ionic 
+6. Extensión de Angular (opcional)
+
+
+---
+## [1. VS Code](#)
+
+- Herramienta principal para codificar tecnologías web (HTML, CSS, JS y TS)
+- Permite instalar extensión para Ionic 
+- E instalar extensión para Angular
+
+===
+## [1. VS Code - Instalación](#)
+
+- No requiere configurar nada especial
+- Es suficiente con el ["siguiente y siguiente"](#)
+- Por supuesto, puede personalizar la instalación según sus preferencias si así lo desea.
+
+===
+## [1. VS Code - Video Instalación](#)
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/F9yBlqzoFSE?si=fsrWB12Uk4QYzh-z" allowfullscreen></iframe>
+
+---
+## [2. Extensión Live Server](#)
+
+- Es una herramienta opcional 
+- Recomendada para practicar tecnologías web (HTML, CSS y JS)
+- Crea un servidor para pruebas 
+- Refresca automáticamente el Browser ante cambios en el código
+
+===
+## [2. Live Server - Instalación](#)
+<iframe width="560" height="315" src="https://www.youtube.com/embed/eddR0OQmjgQ?si=qqFvY7V_cJaF87EX" allowfullscreen></iframe>
+
+===
+## [2. Live Server - Uso](#)
+<iframe width="560" height="315" src="https://www.youtube.com/embed/d38l6vOYEso?si=hgEQGMpB6bkn7mTY" allowfullscreen></iframe>
+
+---
+## [3. Typescript Playground](#)
+
+- Permite practicar Typescript 
+- No requiere instalar nada
+- Se utiliza desde el Browser 
+
+===
+## [3. Typescript Playground - Uso](#)
+<iframe width="560" height="315" src="https://www.youtube.com/embed/LSHlDuBj-1U?si=Y4mJ0FTq_623Z6nV" allowfullscreen></iframe>
+
+---
+## [Conclusión](#)
+
+Usando estas herramientas está en condiciones de practicar las tecnologías web necesarias para comenzar el desarrollo con Ionic Framework, CapacitorJS y Angular.
+
+
+				    </textarea>
+				</section>
+			</div>
+		</div>
+
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/5.0.2/reveal.min.js"></script>
+
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/5.0.2/plugin/notes/notes.min.js"></script>
+		
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/5.0.2/plugin/markdown/markdown.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/5.0.2/plugin/highlight/highlight.min.js"></script>
+		<script>			
+			Reveal.initialize({
+				hash: true,
+				plugins: [ RevealMarkdown, RevealHighlight, RevealNotes, RevealMath.KaTeX ]
+			});
+			Reveal.on('ready', e => {
+				// e.previousSlide, e.currentSlide, e.indexh, e.indexv 				
+				const claseSlide = `slide-${e.indexh}-${e.indexv}`
+				document.body.className = `reveal-viewport ${claseSlide}`
+			});
+			Reveal.on('slidechanged', e => {
+				// e.previousSlide, e.currentSlide, e.indexh, e.indexv 				
+				const claseSlide = `slide-${e.indexh}-${e.indexv}`
+				document.body.className = `reveal-viewport ${claseSlide}`
+			});
+		</script>
+	</body>
+</html>
