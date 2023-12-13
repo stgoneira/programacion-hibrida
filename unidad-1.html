@@ -1,0 +1,173 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>Unidad 1 - Programación Híbrida</title>
+
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/5.0.2/reset.min.css" />
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/5.0.2/reveal.min.css" />
+		
+		<!-- otros themes: https://revealjs.com/themes/ Ejemplos: black, white, league, beige, sky, night, serif, simple, solarized, blood, moon -->
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/5.0.2/theme/white.min.css" />
+		<!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/5.0.2/theme/blood.min.css" /> -->
+
+		<!-- Theme used for syntax highlighted code -->
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/5.0.2/plugin/highlight/monokai.min.css" />
+		
+		<link rel="stylesheet" href="estilo.css" />
+		
+		<!-- plugin notación matemática -->
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/5.0.2/plugin/math/math.min.js"></script>
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+				<section data-separator="^---$" data-separator-vertical="^===$" data-separator-notes="^Note:" data-markdown data-line-numbers>
+    				<textarea data-template>
+## [Unidad 1](#)
+### Programación Híbrida
+
+---
+## [¿De qué trata el curso?](#)
+
+- Con un único código base (HTML, CSS y Typescript)
+- Generar aplicaciones para distintas plataformas (Web, iOS y Android)
+- En el curso se utiliza Ionic + CapacitorJS + Angular
+
+---
+## [Temas](#)
+
+1. Angular
+2. Componentes  
+3. Ionic 
+4. Formularios 	
+5. Eventos
+6. Directivas
+
+---
+## [1. Angular](#)
+- Es un framework para desarrollo web 
+- Conceptos principales son: Componente, Templates y Directivas
+
+---
+## [Proyecto de Demostración](#)
+
+- Cálculo de sueldo líquido de empleados
+- Hay empleados a Contrata (dscto 20%)
+- Y empleados a honorarios (dscto 13%)
+
+===
+## [Proyecto de Demostración](#)
+<iframe width="560" height="315" src="https://www.youtube.com/embed/rMOivFTF2sI?si=hmghFWAWlyu44IZ6" allowfullscreen></iframe>
+
+---
+## [2. Componentes](#)
+
+- Son los bloques de construcción principales de Angular
+- En el proyecto de Ionic el componente "Home" viene conectado al "enrutador", por eso tiene extensión .page 
+- Se utilizan como si fueran una etiqueta de HTML 
+- El nombre de la etiqueta se define en la propiedad "selector"
+
+===
+## [2. Componentes](#)
+
+- Actualmente, se recomienda hacer los componentes "[standalone](#)"
+- Se deben declarar explícitamente los componentes que usa el componente en la propiedad "[imports](#)"
+- Los elementos principales del componente son: la plantilla (HTML) y la clase (Typescript)
+
+===
+## [2. Componentes](#)
+<iframe width="560" height="315" src="https://www.youtube.com/embed/cmdt2JUOeX4?si=ojucpNcDVJvgmFKt" allowfullscreen></iframe>
+
+---
+## [3. Ionic](#)
+- Es un kit de herramientas para construir aplicaciones multiplataforma 
+- Contiene componentes que se adecúan al entorno de ejecución (ej. Android, iOS o Web)
+- Ejemplos de componentes de Ionic son: ion-input, ion-select, ion-image, ion-card, etc 
+- Se puede usar en conjunto etiquetas de Ionic y etiquetas HTML 
+
+===
+## [3. Ionic](#)
+<iframe width="560" height="315" src="https://www.youtube.com/embed/46JMlB9U2Pg?si=sT4vkByVMXEJfwl7" allowfullscreen></iframe>
+
+---
+## [4. Formularios](#)
+
+- En Angular existen 2 tipos de acercamientos para trabajar con formularios:
+	1. Formularios Reactivos 
+	2. Formularios Template-Driven 
+- En esta presentación se utiliza Template-Driven para ejemplificar 
+- Ejemplos de formularios reactivos se encuentran en el material de estudio 
+
+===
+## [4. Formularios](#)
+<iframe width="560" height="315" src="https://www.youtube.com/embed/eE4vwa9ktwI?si=QSZ67Z9NJZxu3D_K" allowfullscreen></iframe>
+
+---
+## [5. Eventos](#)
+
+- Permiten gestionar las acciones a realizar cuando un usuario interactúa con un elemento de la interfaz de usuario 
+- En Angular para vincular un evento con un método se usa la sintaxis con paréntesis, ejemplo, [(click)=manejador()](#)
+- En los videos se ejemplifican el uso del evento [click](#) y del evento [ionChange](#) 
+
+===
+## [5. Eventos - Click](#)
+<iframe width="560" height="315" src="https://www.youtube.com/embed/dEYsCh0ksTQ?si=ydw0e94fUeOauCAd" allowfullscreen></iframe>
+
+---
+## [Clases Modelo](#)
+
+- Puede organizar las clases, interfaces y otros en la carpeta que usted considere 
+- De todas maneras se recomienda colocar una carpeta dentro del directorio "[app](#)"
+- Recuerde utilizar la palabra clave "[export](#)" para que luego pueda utilizar las clases en los otros archivos
+
+===
+## [Clases Modelo](#)
+<iframe width="560" height="315" src="https://www.youtube.com/embed/e8wZMkByIQI?si=0wLNfrpHV6xwK6bH" allowfullscreen></iframe>
+
+===
+## [Integración de las Clases en el Componente](#)
+<iframe width="560" height="315" src="https://www.youtube.com/embed/rZqVsAQsIPo?si=-13GofGycgui3Fus" allowfullscreen></iframe>
+
+---
+## [6. Directiva ngIf](#)
+
+- Permite mostrar u ocultar un elemento de la interfaz de usuario 
+- Requiere que se importe [CommonModule](#) 
+
+===
+## [6. Directiva ngIf](#)
+<iframe width="560" height="315" src="https://www.youtube.com/embed/l-54j3n5XSA?si=n8gK9NN_3z7ElTJn" allowfullscreen></iframe>
+
+
+				    </textarea>
+				</section>
+			</div>
+		</div>
+
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/5.0.2/reveal.min.js"></script>
+
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/5.0.2/plugin/notes/notes.min.js"></script>
+		
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/5.0.2/plugin/markdown/markdown.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/5.0.2/plugin/highlight/highlight.min.js"></script>
+		<script>			
+			Reveal.initialize({
+				hash: true,
+				plugins: [ RevealMarkdown, RevealHighlight, RevealNotes, RevealMath.KaTeX ]
+			});
+			Reveal.on('ready', e => {
+				// e.previousSlide, e.currentSlide, e.indexh, e.indexv 				
+				const claseSlide = `slide-${e.indexh}-${e.indexv}`
+				document.body.className = `reveal-viewport ${claseSlide}`
+			});
+			Reveal.on('slidechanged', e => {
+				// e.previousSlide, e.currentSlide, e.indexh, e.indexv 				
+				const claseSlide = `slide-${e.indexh}-${e.indexv}`
+				document.body.className = `reveal-viewport ${claseSlide}`
+			});
+		</script>
+	</body>
+</html>
