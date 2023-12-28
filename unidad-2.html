@@ -1,0 +1,163 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>Unidad 2 - Programación Híbrida</title>
+
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/5.0.2/reset.min.css" />
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/5.0.2/reveal.min.css" />
+		
+		<!-- otros themes: https://revealjs.com/themes/ Ejemplos: black, white, league, beige, sky, night, serif, simple, solarized, blood, moon -->
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/5.0.2/theme/white.min.css" />
+		<!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/5.0.2/theme/blood.min.css" /> -->
+
+		<!-- Theme used for syntax highlighted code -->
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/5.0.2/plugin/highlight/monokai.min.css" />
+		
+		<link rel="stylesheet" href="estilo.css" />
+		
+		<!-- plugin notación matemática -->
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/5.0.2/plugin/math/math.min.js"></script>
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+				<section data-separator="^---$" data-separator-vertical="^===$" data-separator-notes="^Note:" data-markdown data-line-numbers>
+    				<textarea data-template>
+## [Unidad 2](#)
+### Programación Híbrida
+
+---
+## [Temas](#)
+
+- Proyecto Ejemplo
+- Clases o Interfaces
+- Servicios 
+- Componentes 
+	- @Input
+	- @Output
+- Diseño 
+- Routing
+- Validaciones
+- Persistencia
+
+---
+## [Proyecto para Ejemplos](#)
+- Aplicación para anotar la lista de compras antes de ir al supermercado y luego ir marcando los productos que se hayan agregado al carro.
+
+- Se inició el proyecto con plantilla en blanco, plataforma web, Ionic + Angular.
+
+---
+## [Clases o Interfaces](#)
+
+- Las clases pueden incorporar valores por defecto
+- Las interfaces definen solo la estructura
+- En el ejemplo creamos una clase simple para representar los productos del listado
+
+===
+## [Clases o Interfaces](#)
+```ts
+export class Producto {
+	constructor(
+		public nombre:string = "",
+		public comprado:boolean = false 		
+	){}
+}
+```
+<!-- .element: style="float: left; width: 48%;"-->
+```ts
+export interface Producto {
+	nombre:string
+	comprado:boolean
+}
+```
+<!-- .element: style="float: right; width: 48%;"-->
+
+===
+## [Ejemplo Clase](#)
+<iframe width="560" height="315" src="https://www.youtube.com/embed/fkhQQEjp_js?si=zsSpUJpjMWFRsi8I" allowfullscreen></iframe>
+
+---
+## [Servicios](#)
+- Son funcionalidades que una aplicación necesita
+- Se encapsulan a través de una clase inyectable 
+- Por buena práctica deberían tener un propósito bien definido
+- Y no ser un contenedor de funcionalidades no relacionadas
+
+===
+## [Creación de Servicios](#)
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/2gluKVj0XVM?si=QfG-ClpY-Zjstc_g" allowfullscreen></iframe>
+
+===
+## [Codificación de Servicios](#)
+<iframe width="560" height="315" src="https://www.youtube.com/embed/XHQXI7sC-KE?si=XngEC-FOV0xZ2Kid" allowfullscreen></iframe>
+
+===
+## [Consumo de Servicios](#)
+<iframe width="560" height="315" src="https://www.youtube.com/embed/ZOJcJMrpEtc?si=N0Y0xpFupcdw2jIt" allowfullscreen></iframe>
+
+---
+## [Componentes](#)
+
+- Son los bloques de construcción principales en Angular
+- Pueden anidarse
+- Los decoradores @Input y @Output permiten un bajo acoplamiento
+
+===
+## [Componentes - División](#)
+
+- Es bueno dividir el problema en partes más pequeñas
+- En programación una buena práctica es mantener una alta cohesión y bajo acoplamiento
+- Es buena idea diseñar o dibujar lo que se piensa hacer 
+- Se refleja en un orden de las dependencias entre los elementos
+
+===
+## [Componentes - División](#)
+![Class diagram](img/uml/ph-u2-uml-class-diagram.png)
+
+===
+## [Componentes - División](#)
+
+- Un buen diseño hace los elementos más fácil de testear 
+- Permite dividir el trabajo en equipos sin mayores problemas
+- Se distribuyen mejor las responsabilidades
+
+---
+## [Decorador @Input](#)
+
+---
+## [Decorador @Output](#)
+
+
+				    </textarea>
+				</section>
+			</div>
+		</div>
+
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/5.0.2/reveal.min.js"></script>
+
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/5.0.2/plugin/notes/notes.min.js"></script>
+		
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/5.0.2/plugin/markdown/markdown.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/5.0.2/plugin/highlight/highlight.min.js"></script>
+		<script>			
+			Reveal.initialize({
+				hash: true,
+				plugins: [ RevealMarkdown, RevealHighlight, RevealNotes, RevealMath.KaTeX ]
+			});
+			Reveal.on('ready', e => {
+				// e.previousSlide, e.currentSlide, e.indexh, e.indexv 				
+				const claseSlide = `slide-${e.indexh}-${e.indexv}`
+				document.body.className = `reveal-viewport ${claseSlide}`
+			});
+			Reveal.on('slidechanged', e => {
+				// e.previousSlide, e.currentSlide, e.indexh, e.indexv 				
+				const claseSlide = `slide-${e.indexh}-${e.indexv}`
+				document.body.className = `reveal-viewport ${claseSlide}`
+			});
+		</script>
+	</body>
+</html>
