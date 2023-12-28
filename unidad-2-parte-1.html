@@ -26,26 +26,22 @@
 			<div class="slides">
 				<section data-separator="^---$" data-separator-vertical="^===$" data-separator-notes="^Note:" data-markdown data-line-numbers>
     				<textarea data-template>
-## [Unidad 2](#)
+## [Unidad 2 - Parte 1](#)
 ### Programación Híbrida
 
 ---
-## [Temas](#)
+## [Temas - Parte 1](#)
 
-- Proyecto Ejemplo
-- Clases o Interfaces
-- Servicios 
+- Proyecto Ejemplo  
+- Clases o Interfaces  
+- Servicios   
 - Componentes 
 	- @Input
 	- @Output
-- Diseño 
-- Routing
-- Validaciones
-- Persistencia
 
 ---
 ## [Proyecto para Ejemplos](#)
-- Aplicación para anotar la lista de compras antes de ir al supermercado y luego ir marcando los productos que se hayan agregado al carro.
+- Aplicación para crear y gestionar la lista de compras antes de ir al supermercado, permitiendo marcar los productos a medida que se añaden al carro o que ya han sido comprados.
 
 - Se inició el proyecto con plantilla en blanco, plataforma web, Ionic + Angular.
 
@@ -121,15 +117,42 @@ export interface Producto {
 ===
 ## [Componentes - División](#)
 
-- Un buen diseño hace los elementos más fácil de testear 
-- Permite dividir el trabajo en equipos sin mayores problemas
-- Se distribuyen mejor las responsabilidades
+- Un buen diseño facilita las pruebas (testing)
+- Posibilita el trabajo en equipos autónomos
+- Mejora la distribución de las responsabilidades
+
+===
+## [Componentes - Creación](#)
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/VO1NfiS_TNg?si=qjpb9cPyG7CJGXjg" allowfullscreen></iframe>
+
+===
+## [Componentes - Uso](#)
+<iframe width="560" height="315" src="https://www.youtube.com/embed/euOkrfFqGNY?si=m4tzk8OZfdQ_0sUt" allowfullscreen></iframe>
 
 ---
 ## [Decorador @Input](#)
 
+- Permite la vinculación de propiedades entre componentes padre e hijo.
+- Establece un flujo de datos unidireccional, donde el componente padre puede enviar datos al componente hijo, pero no al revés.
+- Permite la actualización dinámica de propiedades en el componente hijo cuando la propiedad correspondiente en el componente padre cambia.
+
+
+===
+## [Decorador @Input](#)
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/XufVLcUMqT4?si=C2rn5QsU6XoMB6EN" allowfullscreen></iframe>
+
 ---
 ## [Decorador @Output](#)
+
+- Facilita la comunicación de eventos desde el componente hijo hacia el componente padre.
+- En el componente padre, se pueden escuchar estos eventos utilizando la sintaxis correspondiente en la plantilla.
+- Se puede transportar información adicional en el evento.
+
+===
+## [Decorador @Output](#)
+<iframe width="560" height="315" src="https://www.youtube.com/embed/dSy6fuzYQZo?si=mk6Rz73cdxF_cUbf"  allowfullscreen></iframe>
 
 
 				    </textarea>
