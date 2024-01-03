@@ -26,140 +26,254 @@
 			<div class="slides">
 				<section data-separator="^---$" data-separator-vertical="^===$" data-separator-notes="^Note:" data-markdown data-line-numbers>
     				<textarea data-template>
-## [Unidad 2](#)
+## [Unidad 2 (Parte 2)](#)
 ### Programación Híbrida
-
----
-## [Temas - Parte 1](#)
-
-- Proyecto Ejemplo  
-- Clases o Interfaces  
-- Servicios   
-- Componentes 
-	- @Input
-	- @Output
 	
-===
+---
 ## [Temas - Parte 2](#)	
-- Diseño 
 - Routing
 - Validaciones
-- Persistencia
+- Mejoras diseño
+- SQLite
+- Preferencias
+- Ejecución en Android
+
 
 ---
-## [Proyecto para Ejemplos](#)
-- Aplicación para crear y gestionar la lista de compras antes de ir al supermercado, permitiendo marcar los productos a medida que se añaden al carro o que ya han sido comprados.
+## [Routing](#)
 
-- Se inició el proyecto con plantilla en blanco, plataforma web, Ionic + Angular.
-
----
-## [Clases o Interfaces](#)
-
-- Las clases pueden incorporar valores por defecto
-- Las interfaces definen solo la estructura
-- En el ejemplo creamos una clase simple para representar los productos del listado
+- Angular Router hace posible la navegación entre páginas en Ionic 
+- La configuración de las rutas está en el archivo [app.routes.ts](#)
 
 ===
-## [Clases o Interfaces](#)
-```ts
-export class Producto {
-	constructor(
-		public nombre:string = "",
-		public comprado:boolean = false 		
-	){}
+## [Routing](#)
+<iframe width="560" height="315" src="https://www.youtube.com/embed/_pnptBPkreo?si=Zboy7FpjeINhDnH7"  allowfullscreen></iframe>
+
+---
+## [Validaciones](#)
+
+- Recordemos que existen 2 tipos de formularios
+- Y por ende, 2 tipos de validaciones 
+- Para template-driven forms 
+- Y para formularios reactivos 
+
+===
+## [Mejoras de diseño](#)
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/c4Z4VKxDBP8?si=3tkt1vItpZNckdP3"  allowfullscreen></iframe>
+
+===
+## [Validaciones](#)
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/EGwxIeHSWzo?si=EvJ9dN6BQYw-M_nF"  allowfullscreen></iframe>
+
+---
+## [Mejoras Diseño Lista Productos](#)
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/hVLP4japPeM?si=CK74mF9Gzo2-_Pod"  allowfullscreen></iframe>
+
+---
+## [SQLite en Ionic](#)
+
+- Existe un plugin para usar SQLite en entornos: Web, iOS y Android
+- Se llama [@capacitor-community/sqlite](https://github.com/capacitor-community/sqlite)
+- Para entornos Web requiere usar jeep-sqlite
+- jeep-sqlite está creado con Stencil
+
+===
+## [Dependencias - SQLite](#)
+
+```bash
+npm i @capacitor-community/sqlite
+```
+
+===
+## [Web - SQLite](#)
+
+- Para entornos Web se requieren de pasos adicionales:
+	- Copiar [nodes_modules/sql.js/dist/sql-wasm.wasm](#) a [src/assets](#)
+	- Editar archivo [main.ts](#)
+	- Editar AppComponent
+	- Código de inicialización especial 
+
+===
+## [MAIN.TS - SQLite](#)
+
+Editar archivo [main.ts](#)
+```typescript[2,8]
+// otras importaciones
+import { defineCustomElements } from 'jeep-sqlite/loader'
+
+if (environment.production) {
+  enableProdMode();
+}
+
+defineCustomElements(window)
+
+// más código
+```
+
+===
+## [AppComponent - SQLite](#)
+
+Se añade la propiedad schemas
+```typescript[1,9]
+import { Component, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { IonApp, IonRouterOutlet } from '@ionic/angular/standalone';
+
+@Component({
+  selector: 'app-root',
+  templateUrl: 'app.component.html',
+  standalone: true,
+  imports: [IonApp, IonRouterOutlet], 
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
+})
+export class AppComponent {
+  constructor() {}
+}
+
+```
+
+===
+## [AppComponent - SQLite](#)
+
+Uso etiqueta [jeep-sqlite](#)
+```xml[3]
+<ion-app>
+  <ion-router-outlet></ion-router-outlet>
+  <jeep-sqlite autoSave="true"></jeep-sqlite>  
+</ion-app>
+```
+
+===
+## [Web - SQLite](#)
+
+Ejemplo de inicialización para entorno web:
+```typescript
+private async _iniciarPluginWeb(): Promise<void> {    
+	await customElements.whenDefined('jeep-sqlite')
+	const jeepSqliteEl = document.querySelector("jeep-sqlite")
+	if( jeepSqliteEl != null ) {      
+	  await this.sqlite.initWebStore()            
+	}
 }
 ```
-<!-- .element: style="float: left; width: 48%;"-->
-```ts
-export interface Producto {
-	nombre:string
-	comprado:boolean
+
+===
+## [Init - SQLite](#)
+
+Inicialización del plugin y creación de tablas si no existiesen:
+```typescript
+async iniciarPlugin() {    
+	this.plataforma = Capacitor.getPlatform()
+	if(this.plataforma == "web") {
+	  await this._iniciarPluginWeb()
+	}
+	await this.abrirConexion()
+	await this.db.execute(this.DB_SQL_TABLAS)             
 }
 ```
-<!-- .element: style="float: right; width: 48%;"-->
 
 ===
-## [Ejemplo Clase](#)
-<iframe width="560" height="315" src="https://www.youtube.com/embed/fkhQQEjp_js?si=zsSpUJpjMWFRsi8I" allowfullscreen></iframe>
+## [Conexión - SQLite](#)
+
+```typescript
+async abrirConexion() {                    
+	const ret = await this.sqlite.checkConnectionsConsistency() 
+	const isConn = (await this.sqlite.isConnection(this.DB_NAME, this.DB_READ_ONLY)).result
+	if(ret.result && isConn) {
+	  this.db = await this.sqlite.retrieveConnection(this.DB_NAME, this.DB_READ_ONLY)      
+	} else {
+	  this.db = await this.sqlite.createConnection(
+		this.DB_NAME,
+		this.DB_ENCRIPTADA,
+		this.DB_MODE,
+		this.DB_VERSION,
+		this.DB_READ_ONLY
+	  )
+	}
+	await this.db.open()
+}
+```
+
+===
+## [SQL - SQLite](#)
+
+```typescript
+async getProductos():Promise<Producto[]> {    
+	const sql = `SELECT * FROM ${this.DB_TABLE_NAME}`      
+	const resultado = await this.db.query(sql)
+	return resultado?.values ?? []
+}
+async agregarProducto(p:Producto):Promise<void> {    
+	const sql = `INSERT INTO ${this.DB_TABLE_NAME}(${this.DB_COL_PROD}, ${this.DB_COL_COMP}) VALUES(?, ?)`
+	await this.db.run(sql, [p.nombre, p.comprado])    
+}
+```
+
+===
+## [Ejemplo - SQLite](#)
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/gCqOIEUiGOQ?si=eJDurjwe7svKyK36"  allowfullscreen></iframe>
 
 ---
-## [Servicios](#)
-- Son funcionalidades que una aplicación necesita
-- Se encapsulan a través de una clase inyectable 
-- Por buena práctica deberían tener un propósito bien definido
-- Y no ser un contenedor de funcionalidades no relacionadas
+## [Preferences](#)
+
+- Es un plugin nativo de CapacitorJS
+- Permite almacenar strings en formato [clave-valor](#)
+- Es muy sencillo de utilizar
+- La documentación está en: https://ionicframework.com/docs/native/preferences
 
 ===
-## [Creación de Servicios](#)
+## [Instalación - Preferences](#)
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/2gluKVj0XVM?si=QfG-ClpY-Zjstc_g" allowfullscreen></iframe>
+```bash
+npm install @capacitor/preferences
+npx cap sync
+```
 
 ===
-## [Codificación de Servicios](#)
-<iframe width="560" height="315" src="https://www.youtube.com/embed/XHQXI7sC-KE?si=XngEC-FOV0xZ2Kid" allowfullscreen></iframe>
+## [Ejemplos - Preferences](#)
+
+```typescript
+import { Preferences } from '@capacitor/preferences'
+
+await Preferences.set({
+	key: "ORDENAR_ALFABETICAMENTE", 
+	value: "true"
+})
+```
 
 ===
-## [Consumo de Servicios](#)
-<iframe width="560" height="315" src="https://www.youtube.com/embed/ZOJcJMrpEtc?si=N0Y0xpFupcdw2jIt" allowfullscreen></iframe>
+## [Ejemplos - Preferences](#)
+
+```typescript
+import { Preferences } from '@capacitor/preferences'
+
+const deboOrdenar = await Preferences.get({
+	key: "ORDENAR_ALFABETICAMENTE"
+})
+```
+
+===
+## [Video - Preferences](#)
+
+
 
 ---
-## [Componentes](#)
+## [Plataforma Android](#)
 
-- Son los bloques de construcción principales en Angular
-- Pueden anidarse
-- Los decoradores @Input y @Output permiten un bajo acoplamiento
-
-===
-## [Componentes - División](#)
-
-- Es bueno dividir el problema en partes más pequeñas
-- En programación una buena práctica es mantener una alta cohesión y bajo acoplamiento
-- Es buena idea diseñar o dibujar lo que se piensa hacer 
-- Se refleja en un orden de las dependencias entre los elementos
+- Es posible exportar el proyecto de Ionic para que corra en Android
+- Las aplicaciones son manejadas a través de [Android Studio](https://developer.android.com/studio)
+- Requiere la instalación del IDE y la SDK 
+- Puedes correr las aplicaciones en un teléfono o emulador 
+- https://capacitorjs.com/docs/android
 
 ===
-## [Componentes - División](#)
-![Class diagram](img/uml/ph-u2-uml-class-diagram.png)
+## [Instalación - Android Studio](#)
 
 ===
-## [Componentes - División](#)
-
-- Un buen diseño facilita las pruebas (testing)
-- Posibilita el trabajo en equipos autónomos
-- Mejora la distribución de las responsabilidades
-
-===
-## [Componentes - Creación](#)
-
-<iframe width="560" height="315" src="https://www.youtube.com/embed/VO1NfiS_TNg?si=qjpb9cPyG7CJGXjg" allowfullscreen></iframe>
-
-===
-## [Componentes - Uso](#)
-<iframe width="560" height="315" src="https://www.youtube.com/embed/euOkrfFqGNY?si=m4tzk8OZfdQ_0sUt" allowfullscreen></iframe>
-
----
-## [Decorador @Input](#)
-
-- Permite la vinculación de propiedades entre componentes padre e hijo.
-- Establece un flujo de datos unidireccional, donde el componente padre puede enviar datos al componente hijo, pero no al revés.
-- Permite la actualización dinámica de propiedades en el componente hijo cuando la propiedad correspondiente en el componente padre cambia.
-
-
-===
-## [Decorador @Input](#)
-
-<iframe width="560" height="315" src="https://www.youtube.com/embed/XufVLcUMqT4?si=C2rn5QsU6XoMB6EN" allowfullscreen></iframe>
-
----
-## [Decorador @Output](#)
-
-- Facilita la comunicación de eventos desde el componente hijo hacia el componente padre.
-- En el componente padre, se pueden escuchar estos eventos utilizando la sintaxis correspondiente en la plantilla.
-- Se puede transportar información adicional en el evento.
-
-===
-## [Decorador @Output](#)
-<iframe width="560" height="315" src="https://www.youtube.com/embed/dSy6fuzYQZo?si=mk6Rz73cdxF_cUbf"  allowfullscreen></iframe>
+## [Video - Android](#)
 
 
 				    </textarea>
