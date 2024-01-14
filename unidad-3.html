@@ -1,0 +1,142 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>Unidad 1 - Programación Híbrida</title>
+
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/5.0.2/reset.min.css" />
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/5.0.2/reveal.min.css" />
+		
+		<!-- otros themes: https://revealjs.com/themes/ Ejemplos: black, white, league, beige, sky, night, serif, simple, solarized, blood, moon -->
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/5.0.2/theme/white.min.css" />
+		<!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/5.0.2/theme/blood.min.css" /> -->
+
+		<!-- Theme used for syntax highlighted code -->
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/5.0.2/plugin/highlight/monokai.min.css" />
+		
+		<link rel="stylesheet" href="estilo.css" />
+		
+		<!-- plugin notación matemática -->
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/5.0.2/plugin/math/math.min.js"></script>
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+				<section data-separator="^---$" data-separator-vertical="^===$" data-separator-notes="^Note:" data-markdown data-line-numbers>
+    				<textarea data-template>
+## [Unidad 3](#)
+### Programación Híbrida
+
+---
+## [Temas](#)
+
+- Capacitor HTTP
+
+---
+## [Capacitor HTTP](#)
+
+- Plugin incluido en en el núcle de CapacitorJS
+- Permite soporte nativo para [peticiones](#) sobre [HTTP](#) 
+- Es posible reemplazar o parchar la función [window.fetch](#)
+
+===
+## [Parche fetch()](#)
+
+```typescript[9-13]
+import { CapacitorConfig } from '@capacitor/cli';
+
+const config: CapacitorConfig = {
+  appId: 'ph.u3.ej',
+  appName: 'ph-u3-ej',
+  webDir: 'www',
+  server: {
+    androidScheme: 'https'
+  },
+  plugins: {
+    CapacitorHttp: {
+      enabled: true
+    }
+  }
+};
+
+export default config;
+```
+
+===
+## [Capacitor Config](#)
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/xDXMZ-mJjYA?si=0iHm-Do_OG7397v0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+
+===
+## [Métodos HTTP - Rest API](#)
+![HTTP Methods](img/http-methods-rest-api.webp)
+
+===
+## [API Ejemplo](#)
+
+https://www.thecocktaildb.com/api.php
+
+===
+## [Video Intro](#)
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/JT0CHXK5U44?si=_7CXWqHkPe4rdzTt" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+
+===
+## [Proceso Recomendado](#)
+
+1. Recuperar API Key si corresponde 
+2. Analizar la API 
+3. Mapeo con Interfaces
+4. Consumo 
+
+===
+## [Análisis y Mapeo](#)
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/JctkaDY_5Go?si=8cYy2boS8-TqOF2N" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+
+===
+## [Consumo WS - Parte 1](#)
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/c6Gt2kWYW8g?si=DddW1YeRxIkXqzzC" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+
+===
+## [Consumo WS - Parte 2](#)
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/ymhEyLigoVU?si=KVA53lTZXWHh3M3N" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+
+---
+## [Barra de Búsqueda](#)
+
+
+
+				    </textarea>
+				</section>
+			</div>
+		</div>
+
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/5.0.2/reveal.min.js"></script>
+
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/5.0.2/plugin/notes/notes.min.js"></script>
+		
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/5.0.2/plugin/markdown/markdown.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/5.0.2/plugin/highlight/highlight.min.js"></script>
+		<script>			
+			Reveal.initialize({
+				hash: true,
+				plugins: [ RevealMarkdown, RevealHighlight, RevealNotes, RevealMath.KaTeX ]
+			});
+			Reveal.on('ready', e => {
+				// e.previousSlide, e.currentSlide, e.indexh, e.indexv 				
+				const claseSlide = `slide-${e.indexh}-${e.indexv}`
+				document.body.className = `reveal-viewport ${claseSlide}`
+			});
+			Reveal.on('slidechanged', e => {
+				// e.previousSlide, e.currentSlide, e.indexh, e.indexv 				
+				const claseSlide = `slide-${e.indexh}-${e.indexv}`
+				document.body.className = `reveal-viewport ${claseSlide}`
+			});
+		</script>
+	</body>
+</html>
