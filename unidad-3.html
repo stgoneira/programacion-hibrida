@@ -109,6 +109,57 @@ https://www.thecocktaildb.com/api.php
 ---
 ## [Barra de Búsqueda](#)
 
+- Componente de Ionic [ion-searchbar](#)
+- Permite recibir [peticiones de búsqueda](#) de los usuarios
+- Ya trae incorporada la técnica de [debounce](#) 
+- Se [utiliza](#) en [conjunto con otros componentes](#) para mostrar los resultados, por ejemplo, ion-list
+
+===
+## [Barra de Búsqueda](#)
+
+Documentación:
+https://ionicframework.com/docs/api/searchbar
+
+===
+## [Debounce](#)
+
+"[Técnica](#) utilizada para [controlar la frecuencia de ejecución](#) de una función en respuesta a eventos de entrada, como la escritura en un campo de entrada. La función de "debounce" ayuda a [evitar la ejecución excesiva](#) de la función al esperar un breve período de inactividad después de que ocurra el evento antes de ejecutar la función asociada."
+
+===
+## [Barra de Búsqueda](#)
+
+```xml[]
+<ion-searchbar 
+	[debounce]="2000" 
+	(ionInput)="handleInput($event)" />
+
+<ion-list>
+  <ion-item *ngFor="let result of results">
+    <ion-label>{{ result }}</ion-label>
+  </ion-item>
+</ion-list>
+```
+
+===
+## [Video Intro](#)
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/pL95vUBgaSo?si=qcoOTUGSVW4zj7jc" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+
+===
+## [Setup Ejemplo](#)
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/xlFVW3f9olE?si=HIXxjNLHTO3SH46F" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+
+===
+## [Uso](#)
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/GjVirUihcT0?si=1QTbvDelhNWWLkk0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+
+===
+## [Favoritos](#)
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/ajk0yI1id1k?si=4Tp1D2NpeGcrjEyC" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+
 
 
 				    </textarea>
